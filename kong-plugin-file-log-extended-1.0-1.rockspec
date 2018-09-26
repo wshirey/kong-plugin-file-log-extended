@@ -1,7 +1,7 @@
 package = "kong-plugin-file-log-extended"
 version = "1.0-1"
 source = {
-  url = "git+https://github.com/wshirey/kong-plugin-jwt-claims-validate.git",
+  url = "git+https://github.com/wshirey/kong-plugin-file-log-extended.git",
   tag = "v1.0"
 }
 description = {
