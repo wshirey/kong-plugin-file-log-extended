@@ -9,8 +9,6 @@ function _M.serialize(ngx)
     }
   end
 
-  local file_log_extended_ctx = ngx.ctx.file_log_extended or {}
-
   return {
     request = {
       uri = ngx.var.request_uri,
@@ -19,13 +17,13 @@ function _M.serialize(ngx)
       method = ngx.req.get_method(), -- http method
       headers = ngx.req.get_headers(),
       size = ngx.var.request_length,
-      body = file_log_extended_ctx.req_body
+      body = ngx.ctx.file_log_extended_req_body
     },
     response = {
       status = ngx.status,
       headers = ngx.resp.get_headers(),
       size = ngx.var.bytes_sent,
-      body = file_log_extended_ctx.res_body
+      body = ngx.ctx.file_log_extended_res_body
     },
     latencies = {
       kong = (ngx.ctx.KONG_ACCESS_TIME or 0) +
