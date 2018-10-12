@@ -76,10 +76,10 @@ function FileLogExtendedHandler:access(conf)
   FileLogExtendedHandler.super.access(self)
 
 
-  ngx.ctx.file_log_extended = { req_body = "", res_body = "" }
+  ngx.ctx.file_log_extended_req_body = { "" }
   if conf.log_bodies then
     req_read_body()
-    ngx.ctx.file_log_extended.req_body = req_get_body_data()
+    ngx.ctx.file_log_extended_req_body = req_get_body_data()
   end
 end
 
@@ -88,9 +88,9 @@ function FileLogExtendedHandler:body_filter(conf)
 
   if conf.log_bodies then
     local chunk = ngx.arg[1]
-    local res_body = ngx.ctx.file_log_extended and ngx.ctx.file_log_extended.res_body or ""
+    local res_body = ngx.ctx.file_log_extended_res_body or ""
     res_body = res_body .. (chunk or "")
-    ngx.ctx.file_log_extended.res_body = res_body
+    ngx.ctx.file_log_extended_res_body = res_body
   end
 end
 
